@@ -1,4 +1,3 @@
-# app.py
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -16,7 +15,6 @@ def create_app(config_class=Config):
 
     from models import Hero, Power, HeroPower
 
-    # Import routes
     from routes import register_routes
     register_routes(app)
 
