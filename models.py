@@ -1,5 +1,7 @@
+# models.py
 from app import db
 from sqlalchemy import CheckConstraint
+from sqlalchemy.orm import validates  
 
 class Hero(db.Model):
     __tablename__ = 'heroes'
@@ -35,7 +37,7 @@ class Power(db.Model):
 
     @validates('description')
     def validate_description(self, key, value):
-        if len(value) < 20:
+        if not value or len(value) < 20:
             raise ValueError("Description must be at least 20 characters long.")
         return value
 
