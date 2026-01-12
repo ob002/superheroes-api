@@ -5,6 +5,10 @@ from models import Hero, Power, HeroPower
 
 def register_routes(app):
 
+    @app.route('/')
+    def index():
+        return jsonify({"message": "Welcome to the Superheroes API", "endpoints": ["/heroes", "/powers", "/hero_powers"]})
+
     @app.route('/heroes', methods=['GET'])
     def get_heroes():
         heroes = Hero.query.all()
@@ -59,7 +63,6 @@ def register_routes(app):
             return jsonify({"errors": ["description is required"]}), 400
 
         try:
-            # This will trigger the @validates('description') logic
             power.description = data['description']
             db.session.commit()
             return jsonify(power.to_dict())
